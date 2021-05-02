@@ -5,7 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9ff7995-387d-4f27-91ae-33557c78b8b6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/BackEnd/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/ComSsaNet.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/ComSsaNetApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/comssanet/config/SwaggerConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/ComSsaNetApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/comssanet/config/SwaggerConfig.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +36,8 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/BackEnd" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="ProjectId" id="1rnYzmCmLZIyGVBNIBYVFHpoiJU" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -38,21 +55,57 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/BackEnd" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
+  <component name="RunManager" selected="Gradle.Unnamed">
+    <configuration name="Unnamed" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ComSsaNetApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="webcuration" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ComSsaNetApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="ComSsaNetApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="ComSsaNet" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.*" />
@@ -60,10 +113,16 @@
         </pattern>
       </extension>
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.ComSsaNetApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Gradle.Unnamed" />
+      <item itemvalue="Spring Boot.ComSsaNetApplication (1)" />
+      <item itemvalue="Spring Boot.ComSsaNetApplication" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.ComSsaNetApplication" />
@@ -79,6 +138,10 @@
       <option name="presentableId" value="Default" />
       <updated>1619613587426</updated>
       <workItem from="1619613588524" duration="4384000" />
+      <workItem from="1619883916261" duration="601000" />
+      <workItem from="1619884543559" duration="695000" />
+      <workItem from="1619930317458" duration="27000" />
+      <workItem from="1619930623607" duration="552000" />
     </task>
     <servers />
   </component>
@@ -95,5 +158,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
