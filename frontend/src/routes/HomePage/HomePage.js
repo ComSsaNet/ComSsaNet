@@ -1,17 +1,11 @@
 import styled from 'styled-components';
 import React from 'react';
-// import Header from './header';
+import Header from '../../components/Header';
 
 const HomePage = () => {
   return (
     <div>
-      <Header>
-        <Navber>
-          <Logo />
-          <Hamburger />
-          <MyMenu />
-        </Navber>
-      </Header>
+      <Header />
       <SubjectTable>
         <Subject />
         <Subject />
@@ -27,50 +21,6 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-const Header = styled.div`
-  position: absolute;
-  top: 30px;
-  width: 100vw;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Navber = styled.div`
-  width: 90vw;
-  height: 80px;
-  position: relative;
-  background-color: black;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-`;
-
-const Logo = styled.div`
-  position: absolute;
-  width: 70px;
-  height: 50px;
-  background-color: blue;
-  left: 10px;
-`;
-
-const Hamburger = styled.button`
-  position: absolute;
-  right: 70px;
-  width: 70px;
-  height: 50px;
-`;
-
-const MyMenu = styled.div`
-  position: absolute;
-  background-color: blue;
-  width: 50px;
-  height: 50px;
-  right: 10px;
-  border-radius: 50px;
-`;
 
 const SubjectTable = styled.div`
   position: absolute;
