@@ -1,28 +1,42 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineMenu } from 'react-icons/ai';
+import SignIn from './SignIn';
 
 const Header = () => {
+  const [IsModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = useCallback(() => {
+    setIsModalOpen(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
   return (
-    <Sheader>
-      <Wrapper>
-        <LogoContainer>
-          <Logo>컴싸넷</Logo>
-        </LogoContainer>
-        <SearchContainer>검색창</SearchContainer>
-        <MenuContainer>
-          <NavContainer aria-label="메인 메뉴">
-            <NavList>
-              <NavItem>로그인</NavItem>
-              <NavItem>회원가입</NavItem>
-              <NavItem>
-                <StyleAiOutlineMenu />
-              </NavItem>
-            </NavList>
-          </NavContainer>
-        </MenuContainer>
-      </Wrapper>
-    </Sheader>
+    <>
+      <Sheader>
+        <Wrapper>
+          <LogoContainer>
+            <Logo>컴싸넷</Logo>
+          </LogoContainer>
+          <SearchContainer>검색창</SearchContainer>
+          <MenuContainer>
+            <NavContainer aria-label="메인 메뉴">
+              <NavList>
+                <NavItem onClick={openModal}>로그인</NavItem>
+                <NavItem>회원가입</NavItem>
+                <NavItem>
+                  <StyleAiOutlineMenu />
+                </NavItem>
+              </NavList>
+            </NavContainer>
+          </MenuContainer>
+        </Wrapper>
+      </Sheader>
+      <SignIn isOpen={IsModalOpen} closeModal={closeModal} />
+    </>
   );
 };
 
