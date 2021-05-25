@@ -1,7 +1,14 @@
 // action - 현재 파일로 따로 관리할지 리듀서에 넣어놓을지 고민
+
+// 로그인
 export const LOG_IN_REQUEST = 'user/LOG_IN_REQUEST';
 export const LOG_IN_SUCCESS = 'user/LOG_IN_SUCCESS';
 export const LOG_IN_FAILURE = 'user/LOG_IN_FAILURE';
+
+// 회원가입
+export const SIGN_UP_REQUEST = 'user/SIGN_UP_REQUEST';
+export const SIGN_UP_SUCCESS = 'user/SIGN_UP_SUCCESS';
+export const SIGN_UP_FAILURE = 'user/SIGN_UP_FAILURE';
 
 export const initialState = {
   logInLoading: false, // 로그인 시도중

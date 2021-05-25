@@ -2,16 +2,26 @@ import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineMenu } from 'react-icons/ai';
 import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 const Header = () => {
-  const [IsModalOpen, setIsModalOpen] = useState(false);
+  const [IsLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [IsSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
 
-  const openModal = useCallback(() => {
-    setIsModalOpen(true);
+  const openLoginModal = useCallback(() => {
+    setIsLoginModalOpen(true);
   }, []);
 
-  const closeModal = useCallback(() => {
-    setIsModalOpen(false);
+  const closeLoginModal = useCallback(() => {
+    setIsLoginModalOpen(false);
+  }, []);
+
+  const openSignUpModal = useCallback(() => {
+    setIsSignUpModalOpen(true);
+  }, []);
+
+  const closeSignUpModal = useCallback(() => {
+    setIsSignUpModalOpen(false);
   }, []);
 
   return (
@@ -21,12 +31,12 @@ const Header = () => {
           <LogoContainer>
             <Logo>컴싸넷</Logo>
           </LogoContainer>
-          <SearchContainer>검색창</SearchContainer>
+          <SearchContainer />
           <MenuContainer>
             <NavContainer aria-label="메인 메뉴">
               <NavList>
-                <NavItem onClick={openModal}>로그인</NavItem>
-                <NavItem>회원가입</NavItem>
+                <NavItem onClick={openLoginModal}>로그인</NavItem>
+                <NavItem onClick={openSignUpModal}>회원가입</NavItem>
                 <NavItem>
                   <StyleAiOutlineMenu />
                 </NavItem>
@@ -35,7 +45,8 @@ const Header = () => {
           </MenuContainer>
         </Wrapper>
       </Sheader>
-      <SignIn isOpen={IsModalOpen} closeModal={closeModal} />
+      <SignIn isOpen={IsLoginModalOpen} closeModal={closeLoginModal} />
+      <SignUp isOpen={IsSignUpModalOpen} closeModal={closeSignUpModal} />
     </>
   );
 };
@@ -99,7 +110,6 @@ const Logo = styled.a`
   position: relative;
   vertical-align: middle;
   align-items: center;
-  background-color: red;
 `;
 
 const SearchContainer = styled.div`
@@ -107,7 +117,6 @@ const SearchContainer = styled.div`
   flex: 0 1 auto;
   min-width: 0px;
   padding: 0 24px;
-  background-color: yellow;
 `;
 
 const MenuContainer = styled.div`

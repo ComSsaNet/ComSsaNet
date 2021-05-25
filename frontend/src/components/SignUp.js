@@ -3,17 +3,19 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import useInput from '../hooks/useInput';
-import { LOG_IN_REQUEST } from '../_reducers/user';
+import { SIGN_UP_REQUEST } from '../_reducers/user';
 
-const SignIn = ({ isOpen, closeModal }) => {
+const SignUp = ({ isOpen, closeModal }) => {
   const dispatch = useDispatch();
 
   const [Email, onChangeEmail] = useInput('');
+  const [Nickname, onChangeNickname] = useInput('');
   const [Password, onChagePassword] = useInput('');
+  const [ConfirmPassword, onChageConfirmPassword] = useInput('');
 
   const onSubmitForm = useCallback(e => {
     e.preventDefault();
-    dispatch({ type: LOG_IN_REQUEST, data: { Email, Password } });
+    dispatch({ type: SIGN_UP_REQUEST, data: { Email, Nickname, Password } });
   }, []);
 
   return (
@@ -26,7 +28,7 @@ const SignIn = ({ isOpen, closeModal }) => {
             <ModalHeader>
               <LeftTemp />
               <TitleHeader>
-                <Tabtitle>로그인</Tabtitle>
+                <Tabtitle>회원가입</Tabtitle>
               </TitleHeader>
               <RightTemp />
             </ModalHeader>
@@ -35,7 +37,7 @@ const SignIn = ({ isOpen, closeModal }) => {
                 <ContentTitle>
                   <Title>컴싸넷에 오신 걸 환영합니다</Title>
                 </ContentTitle>
-                <LoginForm onSubmit={onSubmitForm}>
+                <SignUpForm onSubmit={onSubmitForm}>
                   <Input
                     name="email"
                     type="text"
@@ -45,6 +47,14 @@ const SignIn = ({ isOpen, closeModal }) => {
                     onChange={onChangeEmail}
                   />
                   <Input
+                    name="nickname"
+                    type="text"
+                    placeholder="닉네임"
+                    value={Nickname}
+                    required
+                    onChange={onChangeNickname}
+                  />
+                  <Input
                     name="password"
                     type="password"
                     placeholder="비밀번호"
@@ -52,8 +62,18 @@ const SignIn = ({ isOpen, closeModal }) => {
                     required
                     onChange={onChagePassword}
                   />
-                  <LoginBtn type="submit">로그인</LoginBtn>
-                </LoginForm>
+                  <Input
+                    name="confirm-password"
+                    type="password"
+                    placeholder="비밀번호 확인"
+                    value={ConfirmPassword}
+                    required
+                    onChange={onChageConfirmPassword}
+                  />
+                  <SignUpBtn type="submit">
+                    <div>회원가입</div>
+                  </SignUpBtn>
+                </SignUpForm>
               </ContentContainer>
               <BreakLineContainer>
                 <BreakLine>
@@ -90,12 +110,12 @@ const SignIn = ({ isOpen, closeModal }) => {
   );
 };
 
-SignIn.propTypes = {
+SignUp.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
 };
 
-export default SignIn;
+export default SignUp;
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -207,7 +227,7 @@ const Title = styled.h3`
   margin-top: 0;
 `;
 
-const LoginForm = styled.form``;
+const SignUpForm = styled.form``;
 
 const Input = styled.input`
   margin-top: 15px;
@@ -222,7 +242,7 @@ const Input = styled.input`
   }
 `;
 
-const LoginBtn = styled.button`
+const SignUpBtn = styled.button`
   cursor: pointer;
   display: inline-block;
   margin: 0px;
