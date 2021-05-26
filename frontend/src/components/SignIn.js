@@ -1,20 +1,31 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import useInput from '../hooks/useInput';
 import { LOG_IN_REQUEST } from '../_reducers/user';
 
 const SignIn = ({ isOpen, closeModal }) => {
   const dispatch = useDispatch();
+  const { logInLoading, logInError, logInDone } = useSelector(
+    state => state.user,
+  );
 
-  const [Email, onChangeEmail] = useInput('');
-  const [Password, onChagePassword] = useInput('');
+  const [email, onChangeEmail] = useInput('');
+  const [password, onChagePassword] = useInput('');
 
-  const onSubmitForm = useCallback(e => {
-    e.preventDefault();
-    dispatch({ type: LOG_IN_REQUEST, data: { Email, Password } });
-  }, []);
+  const onSubmitForm = useCallback(
+    e => {
+      e.preventDefault();
+      dispatch({ type: LOG_IN_REQUEST, data: { email, password } });
+    },
+    [email, password],
+  );
+
+  if (logInDone) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>
@@ -40,7 +51,7 @@ const SignIn = ({ isOpen, closeModal }) => {
                     name="email"
                     type="text"
                     placeholder="이메일"
-                    value={Email}
+                    value={email}
                     required
                     onChange={onChangeEmail}
                   />
@@ -48,11 +59,13 @@ const SignIn = ({ isOpen, closeModal }) => {
                     name="password"
                     type="password"
                     placeholder="비밀번호"
-                    value={Password}
+                    value={password}
                     required
                     onChange={onChagePassword}
                   />
-                  <LoginBtn type="submit">로그인</LoginBtn>
+                  <LoginBtn type="submit">
+                    {logInLoading ? 'Loading' : <div>로그인</div>}
+                  </LoginBtn>
                 </LoginForm>
               </ContentContainer>
               <BreakLineContainer>

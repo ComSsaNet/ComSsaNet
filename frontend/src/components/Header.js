@@ -1,12 +1,14 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineMenu } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
 const Header = () => {
   const [IsLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [IsSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+  const { me } = useSelector(state => state.user);
 
   const openLoginModal = useCallback(() => {
     setIsLoginModalOpen(true);
@@ -35,11 +37,18 @@ const Header = () => {
           <MenuContainer>
             <NavContainer aria-label="메인 메뉴">
               <NavList>
-                <NavItem onClick={openLoginModal}>로그인</NavItem>
-                <NavItem onClick={openSignUpModal}>회원가입</NavItem>
-                <NavItem>
-                  <StyleAiOutlineMenu />
-                </NavItem>
+                {me ? (
+                  <>
+                    <NavItem>
+                      <StyleAiOutlineMenu />
+                    </NavItem>
+                  </>
+                ) : (
+                  <>
+                    <NavItem onClick={openLoginModal}>로그인</NavItem>
+                    <NavItem onClick={openSignUpModal}>회원가입</NavItem>
+                  </>
+                )}
               </NavList>
             </NavContainer>
           </MenuContainer>
