@@ -26,6 +26,7 @@ class MemberTest {
     @Autowired
     EntityManager entityManager;
 
+
     @Test
     public void 멤버넣기테스트() throws Exception {
         //given
