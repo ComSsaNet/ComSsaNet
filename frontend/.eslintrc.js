@@ -26,6 +26,7 @@ module.exports = {
       },
     ],
     'no-unused-vars': 'warn',
+    'no-param-reassign': 0,
   },
   plugins: ['react'],
 };

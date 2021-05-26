@@ -1,22 +1,45 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import useInput from '../hooks/useInput';
 import { SIGN_UP_REQUEST } from '../_reducers/user';
 
+const ErrorMessage = styled.div`
+  color: red;
+`;
+
 const SignUp = ({ isOpen, closeModal }) => {
   const dispatch = useDispatch();
 
-  const [Email, onChangeEmail] = useInput('');
-  const [Nickname, onChangeNickname] = useInput('');
-  const [Password, onChagePassword] = useInput('');
-  const [ConfirmPassword, onChageConfirmPassword] = useInput('');
+  const [email, onChangeEmail] = useInput('');
+  const [nickname, onChangeNickname] = useInput('');
+  const [password, onChagePassword] = useInput('');
 
-  const onSubmitForm = useCallback(e => {
-    e.preventDefault();
-    dispatch({ type: SIGN_UP_REQUEST, data: { Email, Nickname, Password } });
-  }, []);
+  const [passwordCheck, setPasswordCheck] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
+  const onChangePasswordCheck = useCallback(
+    e => {
+      setPasswordCheck(e.target.value);
+      setPasswordError(e.target.value !== password);
+    },
+    [password],
+  );
+
+  const onSubmitForm = useCallback(
+    e => {
+      e.preventDefault();
+      if (password !== passwordCheck) {
+        return setPasswordError(true);
+      }
+      console.log(email, nickname, password);
+      return dispatch({
+        type: SIGN_UP_REQUEST,
+        data: { email, nickname, password },
+      });
+    },
+    [password, passwordCheck],
+  );
 
   return (
     <>
@@ -42,7 +65,7 @@ const SignUp = ({ isOpen, closeModal }) => {
                     name="email"
                     type="text"
                     placeholder="이메일"
-                    value={Email}
+                    value={email}
                     required
                     onChange={onChangeEmail}
                   />
@@ -50,7 +73,7 @@ const SignUp = ({ isOpen, closeModal }) => {
                     name="nickname"
                     type="text"
                     placeholder="닉네임"
-                    value={Nickname}
+                    value={nickname}
                     required
                     onChange={onChangeNickname}
                   />
@@ -58,7 +81,7 @@ const SignUp = ({ isOpen, closeModal }) => {
                     name="password"
                     type="password"
                     placeholder="비밀번호"
-                    value={Password}
+                    value={password}
                     required
                     onChange={onChagePassword}
                   />
@@ -66,10 +89,13 @@ const SignUp = ({ isOpen, closeModal }) => {
                     name="confirm-password"
                     type="password"
                     placeholder="비밀번호 확인"
-                    value={ConfirmPassword}
+                    value={passwordCheck}
                     required
-                    onChange={onChageConfirmPassword}
+                    onChange={onChangePasswordCheck}
                   />
+                  {passwordError && (
+                    <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>
+                  )}
                   <SignUpBtn type="submit">
                     <div>회원가입</div>
                   </SignUpBtn>
