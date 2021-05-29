@@ -1,5 +1,5 @@
 package com.comssanet.comssanet.enums;
 
 public enum BoardType {
-    QUESTION,TENDINOUS
+    QUESTION,SUGGESTION
 }

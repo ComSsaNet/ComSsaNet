@@ -10,7 +10,8 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class BoardWriteDTO {
+public class BoardResponse {
+    private Long boardId;
     private Long memberId;
     private String title;
     private String description;

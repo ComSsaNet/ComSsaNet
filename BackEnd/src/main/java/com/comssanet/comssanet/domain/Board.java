@@ -7,19 +7,20 @@ import lombok.*;
 
 import javax.persistence.*;
 
+
 @Entity
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @ToString
+@Builder
 public class Board extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardId;
 
     @ManyToOne
-    @JoinColumn(updatable = false)
+    @JoinColumn(name = "member_id")
     private Member member;
 
     private String title;
@@ -29,8 +30,4 @@ public class Board extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     private BoardType boardType;
-
-    public void writeMember(Member member) {
-        this.member = member;
-    }
 }
