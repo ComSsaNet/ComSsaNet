@@ -1,8 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { Button } from 'antd';
+import { VscChromeClose } from 'react-icons/vsc';
 import useInput from '../hooks/useInput';
 import { LOG_IN_REQUEST } from '../_reducers/user';
 
@@ -11,6 +13,12 @@ const SignIn = ({ isOpen, closeModal }) => {
   const { logInLoading, logInError, logInDone } = useSelector(
     state => state.user,
   );
+
+  useEffect(() => {
+    if (logInError) {
+      alert(logInError);
+    }
+  }, [logInError]);
 
   const [email, onChangeEmail] = useInput('');
   const [password, onChagePassword] = useInput('');
@@ -22,9 +30,8 @@ const SignIn = ({ isOpen, closeModal }) => {
     },
     [email, password],
   );
-
   if (logInDone) {
-    return <Redirect to="/" />;
+    return null;
   }
 
   return (
@@ -33,7 +40,9 @@ const SignIn = ({ isOpen, closeModal }) => {
         <ModalContainer>
           <Outside onClick={closeModal} />
           <Modal>
-            <XButton onClick={closeModal}>X</XButton>
+            <XButton onClick={closeModal}>
+              <VscChromeClose />
+            </XButton>
             <ModalHeader>
               <LeftTemp />
               <TitleHeader>
@@ -63,8 +72,8 @@ const SignIn = ({ isOpen, closeModal }) => {
                     required
                     onChange={onChagePassword}
                   />
-                  <LoginBtn type="submit">
-                    {logInLoading ? 'Loading' : <div>로그인</div>}
+                  <LoginBtn htmlType="submit" loading={logInLoading}>
+                    {logInLoading ? '' : '로그인'}
                   </LoginBtn>
                 </LoginForm>
               </ContentContainer>
@@ -151,6 +160,13 @@ const XButton = styled.div`
   top: 16px;
   left: 24px;
   z-index: 1;
+  font-size: 20px;
+  cursor: pointer;
+  &:hover {
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+  }
   @media ${props => props.theme.mobile} {
     top: 24px;
   }
@@ -235,7 +251,7 @@ const Input = styled.input`
   }
 `;
 
-const LoginBtn = styled.button`
+const LoginBtn = styled(Button)`
   cursor: pointer;
   display: inline-block;
   margin: 0px;
