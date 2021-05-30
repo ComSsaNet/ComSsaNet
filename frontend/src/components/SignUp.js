@@ -1,7 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Checkbox } from 'antd';
+import { VscChromeClose } from 'react-icons/vsc';
 import useInput from '../hooks/useInput';
 import { SIGN_UP_REQUEST } from '../_reducers/user';
 
@@ -11,6 +14,16 @@ const ErrorMessage = styled.div`
 
 const SignUp = ({ isOpen, closeModal }) => {
   const dispatch = useDispatch();
+
+  const { signUpLoading, signUpDone, signUpError } = useSelector(
+    state => state.user,
+  );
+
+  useEffect(() => {
+    if (signUpError) {
+      alert(signUpError);
+    }
+  }, [signUpError]);
 
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
@@ -26,13 +39,22 @@ const SignUp = ({ isOpen, closeModal }) => {
     [password],
   );
 
+  const [term, setTerm] = useState('');
+  const [termError, setTermError] = useState(false);
+  const onChangeTerm = useCallback(e => {
+    setTerm(e.target.checked);
+    setTermError(false);
+  }, []);
+
   const onSubmitForm = useCallback(
     e => {
       e.preventDefault();
       if (password !== passwordCheck) {
         return setPasswordError(true);
       }
-      console.log(email, nickname, password);
+      if (!term) {
+        return setTermError(true);
+      }
       return dispatch({
         type: SIGN_UP_REQUEST,
         data: { email, nickname, password },
@@ -41,13 +63,19 @@ const SignUp = ({ isOpen, closeModal }) => {
     [password, passwordCheck],
   );
 
+  if (signUpDone) {
+    return null;
+  }
+
   return (
     <>
       {isOpen ? (
         <ModalContainer>
           <Outside onClick={closeModal} />
           <Modal>
-            <XButton onClick={closeModal}>X</XButton>
+            <XButton onClick={closeModal}>
+              <VscChromeClose />
+            </XButton>
             <ModalHeader>
               <LeftTemp />
               <TitleHeader>
@@ -96,8 +124,35 @@ const SignUp = ({ isOpen, closeModal }) => {
                   {passwordError && (
                     <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>
                   )}
-                  <SignUpBtn type="submit">
-                    <div>회원가입</div>
+                  <CheckBoxContainer>
+                    <Checkbox
+                      name="user-term"
+                      checked={term}
+                      onChange={onChangeTerm}
+                    />
+                    <span
+                      style={{ fontWeight: '600', textDecoration: 'underline' }}
+                    >
+                      이용약관
+                    </span>{' '}
+                    및{' '}
+                    <span
+                      style={{ fontWeight: '600', textDecoration: 'underline' }}
+                    >
+                      개인정보 취급방침
+                    </span>{' '}
+                    동의{' '}
+                    <span style={{ fontSize: '14px', color: 'red' }}>
+                      (필수)
+                    </span>
+                    {termError && (
+                      <ErrorMessage>
+                        약관에 동의하셔야 회원가입이 가능합니다.
+                      </ErrorMessage>
+                    )}
+                  </CheckBoxContainer>
+                  <SignUpBtn htmlType="submit" loading={signUpLoading}>
+                    {signUpLoading ? '' : '회원가입'}
                   </SignUpBtn>
                 </SignUpForm>
               </ContentContainer>
@@ -112,7 +167,7 @@ const SignUp = ({ isOpen, closeModal }) => {
                     <SocialLoginBtn>
                       <SocialLoginContent>
                         <SocialLogo />
-                        <SocialText>카카오로 로그인하기</SocialText>
+                        <SocialText>카카오로 시작하기</SocialText>
                       </SocialLoginContent>
                     </SocialLoginBtn>
                   </form>
@@ -122,7 +177,7 @@ const SignUp = ({ isOpen, closeModal }) => {
                     <SocialLoginBtn>
                       <SocialLoginContent>
                         <SocialLogo />
-                        <SocialText>네이버로 로그인하기</SocialText>
+                        <SocialText>네이버로 시작하기</SocialText>
                       </SocialLoginContent>
                     </SocialLoginBtn>
                   </form>
@@ -184,6 +239,13 @@ const XButton = styled.div`
   top: 16px;
   left: 24px;
   z-index: 1;
+  font-size: 20px;
+  cursor: pointer;
+  &:hover {
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+  }
   @media ${props => props.theme.mobile} {
     top: 24px;
   }
@@ -268,7 +330,12 @@ const Input = styled.input`
   }
 `;
 
-const SignUpBtn = styled.button`
+const CheckBoxContainer = styled.div`
+  align-self: center;
+  margin-top: 10px;
+`;
+
+const SignUpBtn = styled(Button)`
   cursor: pointer;
   display: inline-block;
   margin: 0px;
